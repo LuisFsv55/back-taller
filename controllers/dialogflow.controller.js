@@ -25,7 +25,7 @@ const Saludo = async( resultado ) => {
     return respFlutter;
 }
 const Bateria = async( resultado, battery ) => {
-    let respFlutter = `La bateria de su celular es: ${battery}`;
+    let respFlutter = `La bateria de su celular es: ${battery} porciento`;
     return respFlutter;
 }
 // const Donde = async( resultado, address ) => {
