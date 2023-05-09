@@ -13,7 +13,7 @@ const sendDialogFlow = async( req, res ) => {
     let respuesta = await detectIntent( config.GOOGLE_PROJECT_ID, 1234, message, '', 'es' );
     let peticion_body = {};
     // Respuesta de Dialogflow
-    peticion_body = await controllerDialogFlow( respuesta, message.toLocaleLowerCase(), battery );
+    peticion_body = await controllerDialogFlow( respuesta, message.toLocaleLowerCase(), battery, hour );
     res.json({ peticion_body });
 }
 module.exports ={ sendDialogFlow }

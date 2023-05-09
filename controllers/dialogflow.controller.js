@@ -2,7 +2,7 @@ require('dotenv').config();
 const uuid = require('uuid');
 // const { convertidor } = require('../utils/index');
 
-const controllerDialogFlow = async( resultado, senderId, battery ) => {
+const controllerDialogFlow = async( resultado, senderId, battery, hour ) => {
     let peticion = {};
     let respuesta;
     switch ( resultado.intent.displayName ) {
@@ -13,7 +13,11 @@ const controllerDialogFlow = async( resultado, senderId, battery ) => {
         case 'Bateria':
                 respuesta = await Bateria( resultado, battery );
                 peticion = await envio( respuesta )
-                break;    
+                break;
+        case 'Hora':
+            respuesta = await Hora( resultado, hour );
+            peticion = await envio( respuesta )
+            break;
         default:
             peticion = await envio( resultado.fulfillmentText );
             break;
@@ -21,11 +25,15 @@ const controllerDialogFlow = async( resultado, senderId, battery ) => {
     return peticion;
 }
 const Saludo = async( resultado ) => {
-    let respFlutter = `Hola, Bienvenido al asistente`;
+    let respFlutter = `Hola, Bienvenido al asistente de celular`;
     return respFlutter;
 }
 const Bateria = async( resultado, battery ) => {
-    let respFlutter = `La bateria de su celular es: ${battery} porciento`;
+    let respFlutter = `La batería de su celular es: ${battery} porciento`;
+    return respFlutter;
+}
+const Hora = async(resultado, hora)  => {
+    let respFlutter = `La hora actual es: ${hora}`;
     return respFlutter;
 }
 // const Donde = async( resultado, address ) => {
